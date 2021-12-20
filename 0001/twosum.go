@@ -9,7 +9,7 @@ func TwoSum(nums []int, target int) []int {
 
 	for i, n := range nums {
 		if j, ok := m[target-n]; ok && i != j {
-			// i ！= j  是个特殊情况， 譬如， target=6， num[2] = 3, 不应该返回 [2,2]
+			// i ！= j  是个特殊情况， 譬如， target=6， nums[2] = 3, 不应该返回 [2,2]
 			return []int{i, j}
 		}
 	}
