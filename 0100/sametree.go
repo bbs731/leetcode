@@ -1,0 +1,32 @@
+package leetcode
+
+import "github.com/bbs731/leetcode/structures"
+
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+type TreeNode = structures.TreeNode
+
+func isSameTree(p *TreeNode, q *TreeNode) bool {
+
+	if p == nil {
+		return q == nil
+	}
+
+	if q == nil {
+		return false
+	}
+
+	// now p and q are not nils
+	if p.Val != q.Val {
+		return false
+	}
+
+	return isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right)
+
+}
