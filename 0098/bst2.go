@@ -19,3 +19,5 @@ func isValidBST2(root *TreeNode) bool {
 	return helper(root, math.MinInt64, math.MaxInt64)
 
 }
+
+// 你能写出一个 loop 的版本吗？
