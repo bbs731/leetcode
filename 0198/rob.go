@@ -11,6 +11,8 @@ func rob(nums []int) int {
 
 	n := len(nums)
 	// 不是最优解， space 可以省， 可以只用一维的数组表示
+	// 看官网的答案
+	// https://leetcode-cn.com/problems/house-robber/solution/da-jia-jie-she-by-leetcode-solution/
 	c := make([][]int, n)
 	for i := 0; i < n; i++ {
 		c[i] = make([]int, n)
