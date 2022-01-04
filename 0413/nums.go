@@ -12,7 +12,7 @@ f[5] = 3 + 2 + 1 =  6
 f[6] = 4 + 3+ 2 + 1 = 10
 .......
  */
- 
+
 func numberOfArithmeticSlices(nums []int) int {
 	ans := 0
 	initialCache(len(nums))
