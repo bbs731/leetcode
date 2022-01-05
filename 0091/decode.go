@@ -35,6 +35,8 @@ func numDecodings(s string) int {
 	/*
 		dp[n] = dp[n-1] + dp[n-2]
 	 */
+
+	 /* 这个解法，会有 corner case, j from 1 to n 就不会有，下次试下这个顺序  */
 	for j := N - 2; j >= 0; j-- {
 		if isValidDigit(ss[j]) {
 			dp[j] = dp[j+1]
