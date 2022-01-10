@@ -5,7 +5,7 @@ type subString struct {
 	end   int
 }
 
-func longestPalindrome(s string) string {
+func longestPalindrome2(s string) string {
 	res := s[:1]
 	candidates := make([]subString, 0, 2*len(s))
 	holders := make([]subString, 0, 2*len(s))
