@@ -1,5 +1,13 @@
 package leetcode
 
+/* wow !
+这个答案是错了， O(n^2)
+
+有 O（n)的时间复杂度的解!
+重新找状态方程吧，大哥！
+*/
+
+
 func wiggleMaxLength(nums []int) int {
 	N := len(nums)
 	prev := make([]int, N)
