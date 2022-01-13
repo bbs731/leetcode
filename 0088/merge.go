@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-有空间复杂度 O(1) 的解法， 想想！  
+有空间复杂度 O(1) 的解法， 想想！
  */
 func merge(nums1 []int, m int, nums2 []int, n int) {
 
