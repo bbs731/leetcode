@@ -23,7 +23,6 @@ func productExceptSelf(nums []int) []int {
 		} else {
 			ans[i] = 1
 		}
-
 		if i+1 < N {
 			ans[i] *= rev[i+1]
 		}
