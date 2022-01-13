@@ -12,7 +12,7 @@ dp[i][j] = dp[i-1][j] + dp[i][j-1] - dp[i-1][j-1] + matrix[i][j]
 
 然后再利用 dp 的值，来做本道题的查询
 
-wow！  太牛了， 一次提交就过了！ 
+wow！  太牛了， 一次提交就过了！
 
  */
 func matrixBlockSum(mat [][]int, k int) [][]int {
