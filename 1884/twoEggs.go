@@ -13,7 +13,7 @@ DP 的解法， 复杂度是 O（n^2)
 
  */
 
- func twoEggDrop(n int) int {
+func twoEggDrop(n int) int {
 
 	dp := make([]int, n+1)
 	dp[0] = 0
