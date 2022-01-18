@@ -1,5 +1,8 @@
 package leetcode
-
+/*
+我能说什么， 你第一遍写的跟屎一样！
+为啥你的反射弧总是那么的长
+ */
 func binarySearch(nums []int, target int) bool {
 	lo := 0
 	hi := len(nums) - 1
