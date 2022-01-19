@@ -2,6 +2,10 @@ package leetcode
 
 import "sort"
 
+/*
+golang 里面， string to []byte, []byte to string 的转换， 怎么就是记不住呢？
+https://segmentfault.com/a/1190000037679588
+ */
 func groupAnagrams(strs []string) [][]string {
 
 	tables := make(map[string][]string)
