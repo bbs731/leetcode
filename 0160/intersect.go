@@ -5,7 +5,7 @@ type ListNode struct {
 	Next *ListNode
 }
 /*
-困扰了，你多年的题， 甚至让你到了怀疑人生的地步， 结果，它就是一个简单的题！ 
+困扰了，你多年的题， 甚至让你到了怀疑人生的地步， 结果，它就是一个简单的题！
  */
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 
