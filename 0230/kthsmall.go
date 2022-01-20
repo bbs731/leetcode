@@ -16,6 +16,8 @@ type TreeNode struct {
 }
 /*
 Tree travseral 的 loop 的版本
+
+不需要借助 visited hash table ， 只需要一个 stack 也可以中序遍历 BST， 看官方的解题
  */
 func kthSmallest(root *TreeNode, k int) int {
 
