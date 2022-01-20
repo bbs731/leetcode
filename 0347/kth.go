@@ -7,7 +7,7 @@ type Pair struct {
 
 /*
 需要学习一下， 在 golang 中
-Heap 的具体用法， 在解决 top K 的问题中，会很有帮助!	
+Heap 的具体用法， 在解决 top K 的问题中，会很有帮助!
  */
 
 func partition(nums []Pair, k int) []Pair {
