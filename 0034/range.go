@@ -5,7 +5,7 @@ package leetcode
 
 sort.SearchInts 的用法！！！！
 
-不过，就本题的解法来说， 做的完美， 二分查找，需要收敛的掌握，尤其，怎么处理边界条件 
+不过，就本题的解法来说， 做的完美， 二分查找，需要收敛的掌握，尤其，怎么处理边界条件
  */
 func searchRange(nums []int, target int) []int {
 
