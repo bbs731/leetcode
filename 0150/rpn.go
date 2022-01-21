@@ -3,7 +3,7 @@ package leetcode
 import "strconv"
 
 /*
-用 stack, 其它的花里胡哨的想法，都不对！ 
+用 stack, 其它的花里胡哨的想法，都不对！
  */
 func evalRPN(tokens []string) int {
 	stack := []int{}
