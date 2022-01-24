@@ -2,7 +2,7 @@ package leetcode
 /*
 如果，做剪枝，优化呢？
 
-算了吧， 我觉得，这套题的解题思路还是挺清晰的！ 
+算了吧， 我觉得，这套题的解题思路还是挺清晰的！
  */
 func search(board [][]byte, visited [][]bool, word string, k, row, col int) bool {
 
