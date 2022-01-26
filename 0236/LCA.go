@@ -7,7 +7,7 @@ type TreeNode struct {
 }
 
 /*
-这道题， 递归就能解！ 
+这道题， 递归就能解！
  */
 func find(root, n *TreeNode, path []*TreeNode) (bool, []*TreeNode) {
 	if root == nil {
