@@ -16,4 +16,8 @@
 多找问题练，多模仿！
 并能尝试去证明！（这个太难了吧!)
 
+这本书（题库），对我好像没有起到任何的帮助！ 
+https://leetcode-cn.com/leetbook/detail/greedy/
+
+
 链接：https://leetcode-cn.com/leetbook/read/greedy/rv9jf5/
