@@ -1,8 +1,11 @@
 package leetcode
 
 /*
-union-find 的解法！ 
+union-find 的解法！
  */
+ /*
+ union find 有标准的实现方法： find() 函数， 和 union 函数. 写一个标准的模板！ 
+  */
 func findRedundantConnection(edges [][]int) []int {
 
 	parent := make(map[int]int)
