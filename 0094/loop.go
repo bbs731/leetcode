@@ -1,6 +1,9 @@
 package leetcode
 
 /* 进阶: 递归算法很简单，你可以通过迭代算法完成吗？
+
+
+这个实现有明显的错误， 因为是树， 所以无环， 那就不需要使用 visited hash table
 */
 
 func isVisited(n *TreeNode, visited map[*TreeNode]struct{}) bool {
