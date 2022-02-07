@@ -2,7 +2,7 @@ package leetcode
 
 import "sort"
 
-// 这题， 不看题解， 做不出来啊！ 
+// 这题， 不看题解， 做不出来啊！
 
 func fourSum(nums []int, target int) [][]int {
 	sort.Ints(nums)
