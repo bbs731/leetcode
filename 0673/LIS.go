@@ -1,6 +1,6 @@
 package leetcode
 /*
-这道题，对我来说，有点难！ 
+这道题，对我来说，有点难！
  */
 func findNumberOfLIS(nums []int) int {
 
