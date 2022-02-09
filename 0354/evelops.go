@@ -2,6 +2,9 @@ package leetcode
 
 import "sort"
 
+/*
+O(n^2) 的解法， 会超出时间限制
+ */
 func maxEnvelopes(envelopes [][]int) int {
 
 	ans := 0
