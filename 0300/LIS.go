@@ -2,6 +2,10 @@ package leetcode
 
 // This is a O(n^2) solution
 // can reduce time complexity to O(nlgn) ?  可以，属于奇淫意巧，看官方的题解吧！
+
+/*
+LIS  这是， LIS 这一类题里的基础题。 需要了解 O(nlgn) 的解法！
+ */
 func lengthOfLIS(nums []int) int {
 	N := len(nums)
 	prev := make([]int, N)   // save the prev element index that's smaller than current
