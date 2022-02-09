@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-dfs 总是让你怀疑人生！ 
+dfs 总是让你怀疑人生！
  */
 func countSubIslands(grid1 [][]int, grid2 [][]int) int {
 	m := len(grid1)
