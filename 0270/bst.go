@@ -9,7 +9,7 @@ type TreeNode struct {
 }
 
 /*
-没有充分利用性质， 有更优秀的解法！ 
+没有充分利用性质， 有更优秀的解法！
  */
 func closestValue(root *TreeNode, target float64) int {
 
