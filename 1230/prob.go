@@ -5,7 +5,7 @@ package leetcode
 
 这道题， 你根本就没想清楚！
 
-可以降维吗？ target 的维度一定需要吗? 
+可以降维吗？ target 的维度一定需要吗?
 */
 func probabilityOfHeads(prob []float64, target int) float64 {
 	n := len(prob)
