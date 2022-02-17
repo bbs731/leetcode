@@ -1,7 +1,8 @@
 package leetcode
 
 /*
-这个复杂度是多少？ 
+这个复杂度是多少？
+	return head
  */
 func sortList(head *ListNode) *ListNode {
 
