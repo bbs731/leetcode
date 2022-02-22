@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-这是一个 DP 问题。 是变种的 前缀和问题！ 
+这是一个 DP 问题。 是变种的 前缀和问题！
  */
 func maxSumAfterOperation(nums []int) int {
 
