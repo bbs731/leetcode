@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-this is a backtrace problem ,not  a DP problem! 
+this is a backtrace problem ,not  a DP problem!
  */
 func getFactors(n int) [][]int {
 
