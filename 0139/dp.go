@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-边界条件很容易出错啊！ 
+边界条件很容易出错啊！
  */
 func wordBreak(s string, wordDict []string) bool {
 	dict := make(map[string]bool)
