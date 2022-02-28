@@ -1,7 +1,7 @@
 package leetcode
 
 /*
-把 heap 的写法，多写，熟悉吧！ 
+把 heap 的写法，多写，熟悉吧！
  */
 import "container/heap"
 
