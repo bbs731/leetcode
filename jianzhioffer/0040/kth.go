@@ -2,7 +2,7 @@ package leetcode
 
 import "container/heap"
 /*
-这是一个噩梦啊！ 
+这是一个噩梦啊！
  */
 
 type IntHeap []int
