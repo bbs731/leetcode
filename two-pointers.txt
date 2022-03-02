@@ -1,7 +1,0 @@
-双指针的问题， 不仅适用于数组， 同样也适用于链表的问题
-
-https://leetcode-cn.com/leetbook/read/top-interview-questions-medium/xvhqos/
-
-
-找时间，专门练习一下双指针的问题： 问题列表总结如下：
-https://books.halfrost.com/leetcode/ChapterTwo/Two_Pointers/

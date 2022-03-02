@@ -1,0 +1,16 @@
+双指针：
+1. 同一方向的， 快慢指针
+2. 相对方向的， 对撞指针
+
+https://leetcode-cn.com/circle/article/GMopsy/
+
+
+滑动窗口： （sliding window)
+双指针的高级形式， left, right pointer 不断的滑动。
+sliding window 可以把通常的双循环 O（n^2) 的复杂度降为，O（2n), 因为 left 和 right 分别走了 n
+
+https://www.zhihu.com/question/314669016
+
+
+找时间，专门练习一下双指针的问题： 问题列表总结如下：
+https://books.halfrost.com/leetcode/ChapterTwo/Two_Pointers/
