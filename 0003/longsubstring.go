@@ -7,6 +7,9 @@ package leetcode
 	如果发现 s[j] 和 i到j-1之间的一个字符重复，如 s[pos]
 	那么清除 从 i 到 pos 的 m[] 更新 i = pos +1
 
+
+sliding window 
+
 */
 func lengthOfLongestSubstring(s string) int {
 
