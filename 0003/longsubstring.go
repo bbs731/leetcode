@@ -8,7 +8,7 @@ package leetcode
 	那么清除 从 i 到 pos 的 m[] 更新 i = pos +1
 
 
-sliding window 
+sliding window
 
 */
 func lengthOfLongestSubstring(s string) int {
