@@ -1,5 +1,10 @@
 package leetcode
 
+
+/*
+DP problem 873 的进阶版本。
+本题，没要求， 数组，是完全升序的，所以，数组中的数字，可以重复出现
+ */
 func longestArithSeqLength(nums []int) int {
 	n := len(nums)
 	dp := make([][]int, n)
