@@ -2,7 +2,7 @@ package leetcode
 
 // 这道题， 可以用DP 来解答！
 
-// 哎看看，这一坨屎一样的答案！ 
+// 哎看看，这一坨屎一样的答案！
 func canCross(stones []int) bool {
 	// stones must start with 0 and 1
 	// we use a start and end index to represent a queue
