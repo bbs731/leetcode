@@ -6,6 +6,9 @@ import (
 
 /*
 只能说 backtrace 简直太恶心了！ 怎么办呢？
+
+需要深刻的理解， dfs 和 DP 的区别。 什么区别呢？
+
  */
 func combinationSum2(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
