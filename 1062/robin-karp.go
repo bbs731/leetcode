@@ -1,6 +1,6 @@
 package leetcode
 
-// implement Rabin-Karp algorithms
+// implement Rabin-Karp algorithms  又名： 滚动哈希
 // return the starting index that pattern occurs in text
 func search(text, pattern string, q int) []int {
 	pos := make([]int, 0)
