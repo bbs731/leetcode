@@ -1,7 +1,6 @@
 package leetcode
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -22,7 +21,6 @@ func search(L int, nums []int, q int) bool {
 	for i := 1; i <= L; i++ {
 		aL = (aL * base) % q
 	}
-
 
 	for start := 1; start < n-L+1; start++ {
 		h = (h*base - nums[start-1]*aL%q + q) % q
@@ -45,13 +43,13 @@ func longestRepeatingSubstring(s string) int {
 	left, right := 1, n
 	modules := int(math.Pow(2, 24))
 
-	for left <= right {
+	for left < right {
 		L := left + (right-left)>>1
 		if search(L, nums, modules) {
 			left = L + 1
 		} else {
-			right = L - 1
+			right = L
 		}
 	}
-	return left-1
+	return left - 1
 }
