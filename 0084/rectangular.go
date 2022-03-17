@@ -1,5 +1,11 @@
 package leetcode
 
+/*
+官网的思路，更巧妙。
+
+1. 不需要记录 times.  把 index 放进单调栈里面。 这样根据 index 和 i 的值，可以计算长方形的宽了！
+2. 用特殊的 前后 哨兵 0 值， 不需要特殊处理 0 了， 同时最后的 stack 清空也可以不做了。
+ */
 func largestRectangleArea(heights []int) int {
 	// 需要一个 递增的单调栈
 
