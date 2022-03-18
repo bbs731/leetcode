@@ -6,6 +6,7 @@
 状态转移：sums[i] = a[i - 1] + sums[i - 1]
 初始化：sums[0] = 0
 
+leetcode 303 和 304 是基础型 （一维和二维的情况）
 
 https://leetcode-cn.com/leetbook/read/dynamic-programming-1-plus/5mt8sh/
 
