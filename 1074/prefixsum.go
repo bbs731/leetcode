@@ -42,6 +42,7 @@ func numSubmatrixSumTarget(matrix [][]int, target int) int {
 	}
 
 	for r := 0; r < m; r++ {
+		// 既然不需要，计数 row 上面的 1xColumn 的矩阵， 那么我们就不需要保存 hashrow table 了。
 		//hashrow := make(map[int]int) // for each row create a new hashrow map
 		//hashrow[0] = 1
 		row_prefix_sum[0] = 0
