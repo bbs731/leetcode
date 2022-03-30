@@ -3,7 +3,7 @@ package leetcode
 /*
 这道题，太变态了， 完全想不到解法！
 
-下次，重做 ！ 
+下次，重做 ！
  */
 func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 
