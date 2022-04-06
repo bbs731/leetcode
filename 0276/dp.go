@@ -16,7 +16,7 @@ func numWays(n int, k int) int {
 	cp[0] = 0
 
 	for i := 1; i < n; i++ {
-		cp[i] = dp[i-1] 
+		cp[i] = dp[i-1]
 		dp[i] = (k-1)*dp[i-1] + (k-1)*cp[i-1]
 	}
 
