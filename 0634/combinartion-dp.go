@@ -1,5 +1,9 @@
 package leetcode
 
+/*
+ 这个方法，是错误的， 首先， 时间满足不了， 这是 O(n^2) 的解法。
+其次， C[n][k] 很容易就 memoy overflow
+ */
 func findDerangement(n int) int {
 
 	// dp[i] 代表有 i 个数，都不在自己的位置上的组合个数.  通过数学的归纳，知道 dp[i+1] 和 dp[i] 之间的关系
@@ -21,7 +25,7 @@ func findDerangement(n int) int {
 		C[i][0] = 1
 		C[i][i] = 1
 		for k := 1; k <= i/2; k++ {
-			C[i][k] = C[i-1][k] + C[i-1][k-1]
+			C[i][k] = (C[i-1][k] + C[i-1][k-1]) % mod // 这里，在 i 足够大的时候，会 Overflow, 需要 mod
 			C[i][i-k] = C[i][k]
 		}
 	}
@@ -41,7 +45,7 @@ func findDerangement(n int) int {
 	sol[3] = 2
 	for i := 4; i <= n; i++ {
 		ans := f[i]
-		for k := i; k >= 1; k-- {
+		for k := i; k >= 0; k-- {
 			ans = ans - C[i][i-k]*sol[k]
 			ans = (ans + mod) % mod
 		}
