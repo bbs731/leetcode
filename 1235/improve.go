@@ -29,7 +29,11 @@ func jobScheduling(startTime []int, endTime []int, profit []int) int {
 
 	//dp[0] = profit[records[0].originalindex]  // 直接初始化，结果是错的。
 	for i := 1; i <= n; i++ {
-		pos := upperbound(records, startTime[records[i-1].originalindex])
+		//pos := upperbound(records, startTime[records[i-1].originalindex])
+		pos := sort.Search(n, func(mid int) bool {
+			return records[mid].endtime > startTime[records[i-1].originalindex]
+		})
+		// 注意， dp[] 的 starting index 是 1 不是 0 
 		dp[i] = max(dp[i-1], dp[pos]+profit[records[i-1].originalindex])
 
 		ans = max(ans, dp[i])
