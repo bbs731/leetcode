@@ -41,6 +41,8 @@ func longestRepeatingSubstring(s string) int {
 	}
 
 	left, right := 1, n
+	// 如何选取 modules 的值？  需要根据，生日悖论：  https://baike.baidu.com/item/%E7%94%9F%E6%97%A5%E6%82%96%E8%AE%BA
+	// n ~ O(N^1/2) 此时 n = 1500 最大可能出现的子串长度，  N = n^2 = 1500 * 1500 = 2250000 = 2.4* 10 ^6   所以，这里可以用 2^24 来近似
 	modules := int(math.Pow(2, 24))
 
 	for left < right {
