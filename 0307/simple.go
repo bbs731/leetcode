@@ -1,8 +1,10 @@
 package leetcode
 
+/*
+去掉了，惰性标记的版本， 证明也是可行的. 代码简单了不少！
+ */
 type NumArray struct {
 	d    []int
-	b    []int // 这个是惰性的优化， 为了代码简洁的话， 可以不需要 b 这个数组
 	nums []int
 	n    int
 }
@@ -11,7 +13,6 @@ func Constructor(nums []int) NumArray {
 	n := len(nums)
 	a := NumArray{
 		d:    make([]int, 4*n),
-		b:    make([]int, 4*n),
 		nums: nums,
 	}
 	// build segement tree
@@ -36,19 +37,11 @@ func Constructor(nums []int) NumArray {
 func (this *NumArray) Update(index int, val int) {
 	var update func(int, int, int, int, int, int)
 	update = func(l, r, s, t, c, p int) {
-		if l <= s && t <= r {
-			this.d[p] = (r - l + 1) * c
-			this.b[p] = c
+		if s == t {
+			this.d[p] = c
 			return
 		}
 		m := s + (t-s)>>1
-		if this.b[p] != 0 {
-			this.d[p*2] = (m - s + 1) * this.b[p]
-			this.d[p*2+1] = (t - m) * this.b[p]
-			this.b[p*2] = this.b[p]
-			this.b[p*2+1] = this.b[p]
-			this.b[p] = 0
-		}
 		if l <= m {
 			update(l, r, s, m, c, p*2)
 		}
@@ -68,13 +61,6 @@ func (this *NumArray) SumRange(left int, right int) int {
 			return this.d[p]
 		}
 		m := s + (t-s)>>1
-		if this.b[p] != 0 {
-			this.d[p*2] += this.b[p] * (m - s + 1)
-			this.d[p*2+1] += this.b[p] * (t - s)
-			this.b[p*2] += this.b[p]
-			this.b[p*2+1] += this.b[p]
-			this.b[p] = 0
-		}
 		sum := 0
 		if l <= m {
 			sum += getsum(l, r, s, m, p*2)
