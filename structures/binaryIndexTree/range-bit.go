@@ -6,7 +6,7 @@ type BIT struct {
 	n  int
 }
 
-func (b BIT) lowbit(x int) int {
+func lowbit(x int) int {
 	return x & (-x)
 }
 
@@ -15,7 +15,7 @@ func (b BIT) add(x, v int) int {
 	for x <= b.n {
 		b.t1[x] += v
 		b.t2[x] += v1
-		x += b.lowbit(x)
+		x += lowbit(x)
 	}
 }
 
@@ -23,7 +23,7 @@ func (b BIT) getsum(t []int, x int) int {
 	ret := 0
 	for x >= 1 {
 		ret += t[x]
-		x -= b.lowbit(x)
+		x -= lowbit(x)
 	}
 	return ret
 }
