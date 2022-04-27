@@ -1,83 +1,86 @@
 package SegmentTree
 
-var n int = 1000
-
-var dp = make([]int, 4*n)
-var b = make([]int, 4*n)
-var array []int
-
-func build(s, t, p int) {
-	if s == t {
-		dp[s] = array[s]
-	}
-	m := s + (t-s)>>1
-
-	build(s, m, 2*p)
-	build(m+1, t, 2*p+1)
-	dp[p] = dp[2*p] + dp[2*p+1]
+type SegmentTree struct {
+	n  int
+	dp []int
 }
 
-/* 最基本的版本的 query [l,r] 没有考虑 update 的情况 */
-func getsum(l, r int, s, t int, p int) int {
-	if l <= s && t <= r {
-		return dp[p]
+func (seg *SegmentTree) Init(nums []int) {
+	n := len(nums)
+	seg.n = n
+	seg.dp = make([]int, 4*n)
+
+	var build func(int, int, int)
+	build = func(s, t, p int) {
+		if s == t {
+			seg.dp[s] = nums[s-1] // nums index start from 0 and dp index start from 1
+			return
+		}
+		m := s + (t-s)>>1
+		build(s, m, 2*p)
+		build(m+1, t, 2*p+1)
+		seg.dp[p] = seg.dp[2*p] + seg.dp[2*p+1]
+	}
+}
+
+/*
+ [l, r] 的区间 都加上 c
+ */
+
+func (seg *SegmentTree) Add(l, r, s, t, c, p int) {
+	if s == t { // 注意， 因为没有 b[] 惰性的 marker, 这里，只能递推到  s == t 才能更新
+		seg.dp[p] += c
+		return
 	}
 	m := s + (t-s)>>1
-	sum := 0
 	if l <= m {
-		sum += getsum(l, r, s, m, 2*p)
+		seg.Add(l, r, s, m, c, 2*p)
 	}
 	if r > m {
-		sum += getsum(l, r, m+1, t, 2*p+1)
+		seg.Add(l, r, m+1, t, c, 2*p+1)
+	}
+	seg.dp[p] = seg.dp[2*p] + seg.dp[2*p+1]
+}
+
+/*
+range sum query [l, r]
+ */
+func (seg *SegmentTree) Getsum(l, r, s, t, p int) int {
+	if s == t {
+		return seg.dp[p]
+	}
+	sum := 0
+	m := s + (t-s)>>1
+	if l <= m {
+		sum += seg.Getsum(l, r, s, m, 2*p)
+	}
+	if r > m {
+		sum += seg.Getsum(l, r, m+1, t, 2*p+1)
 	}
 	return sum
 }
 
 /*
- [l, r] 区间的数，每个数需要 +c
+range max query [l, r]
  */
-func update(l, r int, s, t int, c int, p int) {
-	if l <= s && t <= r {
-		dp[p] += (r - l + 1) * c
-		b[p] += c
-		return
+func (seg *SegmentTree) GetMax(l, r, s, t, p int) int {
+	if s == t {
+		return seg.dp[p]
 	}
+	value := 0
 	m := s + (t-s)>>1
-
-	if b[p] != 0 && s != t { // 这里，为啥要判断  s != t .  其实可以没有
-		dp[2*p] += (m - s + 1) * b[p]
-		dp[2*p+1] += (t - m) * b[p]
-		b[2*p] += b[p]
-		b[2*p+1] += b[p]
-		b[p] = 0
-	}
 	if l <= m {
-		update(l, r, s, m, c, p*2)
+		value = max(value, seg.GetMax(l, r, s, m, 2*p))
 	}
 	if r > m {
-		update(l, r, m+1, t, c, p*2+1)
+		value = max(value, seg.GetMax(l, r, m+1, t, 2*p+1))
 	}
-	dp[p] = dp[2*p] + dp[2*p+1]
+	return value
 }
 
-func getsum(l, r int, s, t int, p int) int {
-	if l <= s && t <= r {
-		return dp[p]
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
-	m := s + (t-s)>>1
-	if b[p] != 0 {
-		dp[p*2] += b[p] * (m - s + 1)
-		dp[p*2+1] += b[p] * (t - m)
-		b[p*2] += b[p]
-		b[p*2+1] += b[p]
-		b[p] = 0
-	}
-	sum := 0
-	if l <= m {
-		sum += getsum(l, r, s, m, p*2)
-	}
-	if r > m {
-		sum += getsum(l, r, m+1, t, p*2+1)
-	}
-	return sum
+	return b
 }
