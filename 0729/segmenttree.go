@@ -1,6 +1,8 @@
 package leetcode
 
-import "sort"
+import (
+	"sort"
+)
 
 type segmentree struct {
 	n     int
@@ -29,37 +31,8 @@ func (seg *segmentree) build(s, t, p int) {
 	seg.dp[p] = seg.dp[2*p] + seg.dp[2*p+1]
 }
 
-//func (seg *segmentree) getsum(l, r int, s, t int, p int) int {
-//	if l <= s && t <= r {
-//		return seg.dp[p]
-//	}
-//	m := s + (t-s)>>1
-//	if seg.b[p] != 0 {
-//		seg.dp[p*2] += seg.b[p] * (m - s + 1)
-//		seg.dp[p*2+1] += seg.b[p] * (t - m)
-//		seg.b[p*2] += seg.b[p]
-//		seg.b[p*2+1] += seg.b[p]
-//		seg.b[p] = 0
-//	}
-//	sum := 0
-//	if l <= m {
-//		sum += seg.getsum(l, r, s, m, 2*p)
-//	}
-//	if r > m {
-//		sum += seg.getsum(l, r, m+1, t, 2*p+1)
-//	}
-//	return sum
-//}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func (seg *segmentree) getmax(l, r, s, t, p int) int {
-	if s == t {
+func (seg *segmentree) getsum(l, r int, s, t int, p int) int {
+	if l <= s && t <= r {
 		return seg.dp[p]
 	}
 	m := s + (t-s)>>1
@@ -70,21 +43,29 @@ func (seg *segmentree) getmax(l, r, s, t, p int) int {
 		seg.b[p*2+1] += seg.b[p]
 		seg.b[p] = 0
 	}
-	value := 0
+	sum := 0
 	if l <= m {
-		value = max(value, seg.getmax(l, r, s, m, 2*p))
+		sum += seg.getsum(l, r, s, m, 2*p)
 	}
 	if r > m {
-		value = max(value, seg.getmax(l, r, m+1, t, 2*p+1))
+		sum += seg.getsum(l, r, m+1, t, 2*p+1)
 	}
-	return value
+	return sum
 }
 func (seg *segmentree) update(l, r, s, t, c, p int) {
-	if s == t {
-		seg.dp[p] += c
+	if l <= s && t <= r {
+		seg.dp[p] += (r - l + 1) * c
+		seg.b[p] += c
 		return
 	}
 	m := s + (t-s)>>1
+	if seg.b[p] != 0 && s != t {
+		seg.dp[2*p] += (m - s + 1) * seg.b[p]
+		seg.dp[2*p+1] += (t - m) * seg.b[p]
+		seg.b[2*p] += seg.b[p]
+		seg.b[2*p+1] += seg.b[p]
+		seg.b[p] = 0
+	}
 
 	if l <= m {
 		seg.update(l, r, s, m, c, p*2)
@@ -95,19 +76,18 @@ func (seg *segmentree) update(l, r, s, t, c, p int) {
 	seg.dp[p] = seg.dp[p*2] + seg.dp[p*2+1]
 }
 
-type MyCalendarThree struct {
+type MyCalendar struct {
 	queries [][2]int
 }
 
-func Constructor() MyCalendarThree {
+func Constructor() MyCalendar {
 
-	return MyCalendarThree{
+	return MyCalendar{
 		queries: make([][2]int, 0),
 	}
 }
 
-func (this *MyCalendarThree) Book(start int, end int) int {
-
+func (this *MyCalendar) Book(start int, end int) bool {
 	this.queries = append(this.queries, [2]int{start, end})
 	// build up segment tree
 	n := len(this.queries)
@@ -136,12 +116,16 @@ func (this *MyCalendarThree) Book(start int, end int) int {
 	seg.init(array)
 	seg.build(1, len(array), 1)
 
-	for i := 0; i < n; i++ {
+	for i := 0; i < n-1; i++ {
 		l := kth[this.queries[i][0]]
 		r := kth[this.queries[i][1]-1]
 		seg.update(l, r, 1, kl, 1, 1)
 	}
 
-	return seg.getmax(1, kl, 1, kl, 1)
-
+	if seg.getsum(kth[this.queries[n-1][0]], kth[this.queries[n-1][1]-1], 1, kl, 1) != 0 {
+		// remove the last element
+		this.queries = this.queries[:n-1]
+		return false
+	}
+	return true
 }
