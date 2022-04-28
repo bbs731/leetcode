@@ -7,22 +7,9 @@ type SegmentTree struct {
 	dp []int
 }
 
-func (seg *SegmentTree) Init(nums []int) {
-	n := len(nums)
+func (seg *SegmentTree) Init(n int) {
 	seg.n = n
 	seg.dp = make([]int, 4*n)
-
-	var build func(int, int, int)
-	build = func(s, t, p int) {
-		if s == t {
-			seg.dp[s] = nums[s-1] // nums index start from 0 and dp index start from 1
-			return
-		}
-		m := s + (t-s)>>1
-		build(s, m, 2*p)
-		build(m+1, t, 2*p+1)
-		seg.dp[p] = max(seg.dp[p*2+1], seg.dp[2*p])
-	}
 }
 
 func (seg *SegmentTree) update(l, r, s, t, c, p int) {
@@ -91,9 +78,8 @@ func getSkyline(buildings [][]int) [][]int {
 		}
 	}
 	kl := len(kth)
-	array := make([]int, kl)
 	seg := &SegmentTree{}
-	seg.Init(array)
+	seg.Init(kl)
 
 	for i := 0; i < n; i++ {
 		l := kth[buildings[i][0]*10]
