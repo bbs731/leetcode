@@ -25,10 +25,6 @@ func (seg *SegmentTree) Init(nums []int) {
 	}
 }
 
-/*
- [l, r] 的区间 都加上 c
- */
-
 func (seg *SegmentTree) update(l, r, s, t, c, p int) {
 	if s == t {
 		seg.dp[p] = max(seg.dp[p], c)
