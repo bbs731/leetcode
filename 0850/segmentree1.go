@@ -88,7 +88,7 @@ func rectangleArea(rectangles [][]int) int {
 	kyth := make(map[int]int)
 	k := 1
 	kyth[allys[0]] = 1
-	ys := make([]int, 1) // ys 需要多加个 0， 不然， getLeft 会无限循环。
+	ys := make([]int, 1) // ys 需要多加个 0， 不然， getLeft 会无限循环。 /* 这个版本的 线段树的实现 Left, Right 必须要求 left 有一个 dummy node 不然，就会无限循环 */
 	ys = append(ys, allys[0])
 	for i := 1; i < len(allys); i++ {
 		if allys[i] != allys[i-1] {
