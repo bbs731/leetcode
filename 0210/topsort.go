@@ -22,11 +22,7 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 		return true
 	}
 
-	// prepare
 	// prepare adj
-	for i := 0; i < numCourses; i++ {
-		adj[i] = make([]int, 0)
-	}
 	for _, p := range prerequisites {
 		adj[p[0]] = append(adj[p[0]], p[1])
 	}
@@ -38,6 +34,5 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 			}
 		}
 	}
-	// reverse orders
 	return orders
 }
