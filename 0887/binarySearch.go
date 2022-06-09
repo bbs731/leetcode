@@ -53,7 +53,7 @@ func superEggDrop(k int, n int) int {
 					hi = mid
 				}
 			}
-			dp[i][eggs] = min(max(dp[lo-1][eggs-1], dp[i-lo][eggs]), max(dp[hi-1][eggs-1], dp[i-hi][eggs]))
+			dp[i][eggs] = 1 + min(max(dp[lo-1][eggs-1], dp[i-lo][eggs]), max(dp[hi-1][eggs-1], dp[i-hi][eggs]))
 		}
 	}
 	return dp[n][k]
