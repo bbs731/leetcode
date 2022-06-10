@@ -1,5 +1,10 @@
 package leetcode
 
+/*
+digit dp 模板和代码， 参见：
+https://leetcode.cn/problems/digit-count-in-range/solution/leetcodeshu-wei-dpzong-jie-by-pedantic-einstein/
+
+ */
 func countDigitOne(n int) (ans int) {
 	x := n
 	pos := 0
