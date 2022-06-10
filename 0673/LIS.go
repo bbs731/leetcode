@@ -1,4 +1,5 @@
 package leetcode
+
 /*
 这道题，对我来说，有点难！
  */
@@ -7,12 +8,10 @@ func findNumberOfLIS(nums []int) int {
 	dp := make([]int, len(nums)) // dp[i] = max{dp[j] + 1}
 	cnt := make([]int, len(nums))
 
-	dp[0] = 1
-	cnt[0] = 1
 	maxlen := 0
 	ans := 0
 
-	for i := 1; i < len(nums); i++ {
+	for i := 0; i < len(nums); i++ {
 		cnt[i] = 1
 		dp[i] = 1
 		for j := 0; j <= i-1; j++ {
