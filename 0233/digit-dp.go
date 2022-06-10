@@ -4,6 +4,7 @@ package leetcode
 digit dp 模板和代码， 参见：
 https://leetcode.cn/problems/digit-count-in-range/solution/leetcodeshu-wei-dpzong-jie-by-pedantic-einstein/
 
+时间复杂度， 应该是 O(pos * pos * 10)   其中 pos = O(lg n)
  */
 func countDigitOne(n int) (ans int) {
 	x := n
