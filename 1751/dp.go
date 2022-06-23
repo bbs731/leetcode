@@ -1,6 +1,9 @@
 package leetcode
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 /*
 参考 1235  similar DP problem
@@ -18,11 +21,14 @@ func maxValue(events [][]int, k int) int {
 		return events[i][1] < events[j][1]
 	})
 
+	fmt.Println(events)
+
 	for i := 1; i <= n; i++ {
 		pos := sort.Search(n, func(mid int) bool {
-			return events[mid][1] > events[i-1][0]-1 // 看题， [1, 1] start time = end time = 1 interval
+			return events[mid][1] > events[i-1][0]-1
 		})
-		for q := 1; q <= k && q <= i; q++ {
+
+		for q := 1; q <= k; q++ {
 			dp[i][q] = max(dp[i-1][q], dp[pos][q-1]+events[i-1][2])
 		}
 	}
