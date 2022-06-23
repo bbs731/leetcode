@@ -10,7 +10,6 @@ func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 	if maxChoosableInteger*(maxChoosableInteger+1) < 2*desiredTotal {
 		return false
 	}
-
 	size := 1 << uint(maxChoosableInteger)
 	// 1 stands for black win , -1 white win, 0 dual (not decided yet)
 	dp := make([]int, size)
@@ -26,7 +25,7 @@ func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 				continue
 			}
 
-			if k+1 >= total || dfs(state|(1<<uint(k)), total-k-1) == 1 { // 我们成功了，或者，对手失败了！
+			if k+1 >= total || dfs(state|(1<<uint(k)), total-k-1) == -1 {
 				dp[state] = 1
 				return 1
 			}
@@ -40,3 +39,4 @@ func canIWin(maxChoosableInteger int, desiredTotal int) bool {
 	}
 	return false
 }
+
