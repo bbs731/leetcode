@@ -1,5 +1,8 @@
 package leetcode
 
+/*
+这个 trie 的实现，很蹩脚啊！ 看看其它例子的Trie实现
+ */
 type Trie struct {
 	word bool
 	s    string
