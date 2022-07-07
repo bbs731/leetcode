@@ -26,7 +26,7 @@ type SA struct {
 
 思路就是：
 1. 如果  rank[sa[i]] == rank[sa[i]-1]  && rank[sa[i] + w ] == rank[sa[i-1] + w]   // 包括倍增之后的结果一样的话
-那么下一轮了的 rank,  newrank[sa[i]]  = newrank[sa[i-1]]
+那么下一轮了的 rank,  newrank[sa[i]]  = newrank[sa[i-1]]  (代表，我们还需要一轮 binary lifting, 才能区分 rank 的值）
 否则的话，  newrank[sa[i]] = newranks[sa[i-1]] + 1
 
 2. 根据 newrank 的值， 还需要更新下 sa 数组， 这时候，根据 newrank 值， sort 一下 sa 就可以
@@ -37,13 +37,15 @@ func NewSA(src string) *SA {
 
 	sa := make([]int, n)
 	rk := make([]int, 2*n) // 开2n 的大小，是为了  sa[i] + w 就不用检查越不越界了
+	for i := n; i < 2*n; i++ {
+		rk[i] = -1 // 为了，处理，譬如 str = "aaaaaaaa" 的情况
+	}
 	oldrk := make([]int, 2*n)
 
 	for i := 0; i < n; i++ {
 		rk[i] = int(src[i] - 'a')
 		sa[i] = i
 	}
-	//fmt.Println("sa", sa)
 
 	// binary lifting
 	for w := 1; w < n; w = w * 2 {
@@ -53,22 +55,23 @@ func NewSA(src string) *SA {
 			}
 			return rk[sa[x]+w] < rk[sa[y]+w]
 		})
-		//fmt.Println("sa", sa)
-		//fmt.Println("rk", rk)
 
 		// 计算新的 rk 的时候，会有覆盖发生，所以先 copy 一份
 		copy(oldrk, rk)
-		rk[sa[0]] = 0
-		//p := 0
+		rk[sa[0]] = 0 // rank 的值域应该从 0 开始
 		for i := 1; i < n; i++ {
 			if oldrk[sa[i]] == oldrk[sa[i-1]] && oldrk[sa[i]+w] == oldrk[sa[i-1]+w] {
 				rk[sa[i]] = rk[sa[i-1]]
+				//rk[sa[i]] = p
 			} else {
-				//p = p + 1
+				//p++
 				//rk[sa[i]] = p
 				rk[sa[i]] = rk[sa[i-1]] + 1
 			}
 		}
+
+		//fmt.Println("sa", sa)
+		//fmt.Println("rk", rk)
 	}
 
 	// 根据引理:  height[rk[i]] >= height[rk[i-1]] - 1.   证明在这里： https://oi-wiki.org/string/sa/
@@ -96,7 +99,7 @@ func NewSA(src string) *SA {
 		if h > 0 {
 			h--
 		}
-		for j := sa[rk[i]-1]; src[i+h] == src[j+h]; h++ {
+		for j := sa[rk[i]-1]; i+h < n && j+h < n && src[i+h] == src[j+h]; h++ {
 		}
 		height[rk[i]] = h
 	}
@@ -106,7 +109,7 @@ func NewSA(src string) *SA {
 
 func main() {
 
-	str := "vamamadn"
+	str := "aaaaa"
 	sa := NewSA(str)
 	fmt.Println(sa.sa)
 	fmt.Println(sa.rk)
