@@ -16,6 +16,22 @@ type SA struct {
 	height []int
 }
 
+/*
+
+可以这么理解，
+代码的主线，就是 rank 的倍增排序， sa 是为 求 rank 来服务的， sa 作为辅助的数组。
+
+总共需要 log(n) 轮的倍增， 除了最后一轮， 其它轮， 任意两个 rank[i], rank[j] 是有可能相等的， 这个时候， 需要借助 sa 数组， 来给新的 rank 赋值（相对大小），
+当然如果用基数排序来做，也是为了同样的目的，就是给rank赋相对大小的值
+
+思路就是：
+1. 如果  rank[sa[i]] == rank[sa[i]-1]  && rank[sa[i] + w ] == rank[sa[i-1] + w]   // 包括倍增之后的结果一样的话
+那么下一轮了的 rank,  newrank[sa[i]]  = newrank[sa[i-1]]
+否则的话，  newrank[sa[i]] = newranks[sa[i-1]] + 1
+
+2. 根据 newrank 的值， 还需要更新下 sa 数组， 这时候，根据 newrank 值， sort 一下 sa 就可以
+
+ */
 func NewSA(src string) *SA {
 	n := len(src)
 
@@ -43,13 +59,14 @@ func NewSA(src string) *SA {
 		// 计算新的 rk 的时候，会有覆盖发生，所以先 copy 一份
 		copy(oldrk, rk)
 		rk[sa[0]] = 0
-		p := 0
+		//p := 0
 		for i := 1; i < n; i++ {
 			if oldrk[sa[i]] == oldrk[sa[i-1]] && oldrk[sa[i]+w] == oldrk[sa[i-1]+w] {
-				rk[sa[i]] = p
+				rk[sa[i]] = rk[sa[i-1]]
 			} else {
-				p = p + 1
-				rk[sa[i]] = p
+				//p = p + 1
+				//rk[sa[i]] = p
+				rk[sa[i]] = rk[sa[i-1]] + 1
 			}
 		}
 	}
