@@ -71,18 +71,18 @@ func NewSA(src string) *SA {
 		}
 	}
 
-	// 根据引理:  height[rk[i]] >= height[rk[i-1]] - 1
+	// 根据引理:  height[rk[i]] >= height[rk[i-1]] - 1.   证明在这里： https://oi-wiki.org/string/sa/
 	/*
 		推倒的过程，
 		根据定义：  height[i] = lcp( suffix(sa[i]), suffix(sa[i-1])
 		所以：
-			height[rk[i]] = lcp (suffix(sa[rk[i]],  suffix(sa[rk[i]-1))
-	                      = lcp (suffix(i), suffix(sa[rk[i]-1])
+			height[rk[i]] = lcp (suffix(sa[rk[i]]),  suffix(sa[rk[i]-1))
+	                      = lcp (suffix(i), suffix(sa[rk[i]-1]))
 
 		令， height[rk[i-1]] = h,   则  height[rk[i]] >= h -1
 	    令， j = sa[rk[i]-1]  则，
 
-	     height[rk[i]] = lcp(suffix(i), suffix(j)
+	     height[rk[i]] = lcp(suffix(i), suffix(j))
 	                   = h-1 + lcp(suffix(i+h-1），suffix(j+h-1))
 		为以下代码，计算 height[rk[i]] 的步骤过程
 	 */
