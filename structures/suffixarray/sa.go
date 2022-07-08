@@ -69,9 +69,6 @@ func NewSA(src string) *SA {
 				rk[sa[i]] = rk[sa[i-1]] + 1
 			}
 		}
-
-		//fmt.Println("sa", sa)
-		//fmt.Println("rk", rk)
 	}
 
 	// 根据引理:  height[rk[i]] >= height[rk[i-1]] - 1.   证明在这里： https://oi-wiki.org/string/sa/
@@ -89,6 +86,8 @@ func NewSA(src string) *SA {
 	                   = h-1 + lcp(suffix(i+h-1），suffix(j+h-1))
 		为以下代码，计算 height[rk[i]] 的步骤过程
 	 */
+
+	rk[sa[0]] = 0 // 这行代码，可以防止在 n= 1 的时候，程序崩溃， 因为 n=1 时候， rk[0] = src[0] - 'a'  可能会引起在计算 height 数组的时候， sa[rk[i]-1] index out of range
 	// compute height
 	height := make([]int, n)
 	h := 0
@@ -109,7 +108,7 @@ func NewSA(src string) *SA {
 
 func main() {
 
-	str := "aaaaa"
+	str := "p"
 	sa := NewSA(str)
 	fmt.Println(sa.sa)
 	fmt.Println(sa.rk)
