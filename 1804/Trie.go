@@ -5,6 +5,8 @@ Trie 的代码实现：
 
 代码源头：
 https://github.com/EndlessCheng/codeforces-go/blob/master/copypasta/trie.go
+
+https://leetcode.cn/problems/implement-trie-ii-prefix-tree/solution/go-xie-fa-by-endlesscheng-i16o/
  */
 
 type trieNode struct {
@@ -70,7 +72,6 @@ func (this *Trie) CountWordsStartingWith(prefix string) int {
 	}
 	return o.prefix
 }
-
 
 func (this *Trie) Erase(word string) {
 	o := this.root
