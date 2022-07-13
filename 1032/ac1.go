@@ -68,8 +68,9 @@ func (this *StreamChecker) Query(letter byte) bool {
 		this.cur = this.root
 	}
 	ret := this.cur.wordend
-	if this.cur.fail != nil {
-		ret = ret || this.cur.fail.wordend
+
+	for f := this.cur.fail; f != this.root; f = f.fail {
+		ret = ret || f.wordend
 	}
 	return ret
 }
