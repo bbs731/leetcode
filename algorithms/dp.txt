@@ -36,3 +36,11 @@ https://leetcode-cn.com/leetbook/read/dynamic-programming-1-plus/5ouqw2/
 dp[n] = f(dp[i]) 其中 i < n
 
 
+
+
+0-1 背包问题：
+https://leetcode.cn/leetbook/read/dynamic-programming-2-plus/5253i5/
+https://oi-wiki.org/dp/knapsack/
+
+区间DP：
+https://oi-wiki.org/dp/interval/
