@@ -2,6 +2,8 @@ package leetcode
 
 /*
 这道题 range dp 是自己想出来的！
+
+思路参考的是这里：  https://oi-wiki.org/dp/interval/， 但是1000 比 OI上的例题要难！
  */
 func solve(f [][]int, prefixsum []int, n, k int, mergeable []bool) int {
 
