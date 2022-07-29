@@ -1,4 +1,4 @@
-package algorithms
+package digit_dp
 
 // 时间复杂度,  O(pos * 10)  状态数 x 状态转移数
 // Digig DP template
