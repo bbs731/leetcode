@@ -14,6 +14,7 @@ states that a matching M in a graph G is maximum (contains the largest possible 
 
 Augmenting Path Algorithm 用来实现 Berge's theorem
 
+时间复杂度： O(nm)
 */
 
 /*
