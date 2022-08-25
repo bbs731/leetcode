@@ -1,10 +1,3 @@
-
-/*
-https://oi-wiki.org/graph/graph-matching/bigraph-weight-match/
-
-时间复杂度是 O(n ^3)
-*/
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,10 +12,9 @@ struct hungarian {  // km
   vector<T> lx;
   vector<T> ly;
   vector<vector<T> > g;
-  vector<T> slack;
   T inf;
   T res;
-  queue<int> q;
+  vector<int> queue;
   int org_n;
   int org_m;
 
@@ -40,76 +32,71 @@ struct hungarian {  // km
     visy = vector<bool>(n);
     lx = vector<T>(n, -inf);
     ly = vector<T>(n);
-    slack = vector<T>(n);
   }
 
   void addEdge(int u, int v, int w) {
     g[u][v] = max(w, 0);  // 负值还不如不匹配 因此设为0不影响
   }
 
-  bool check(int v) {
-    visy[v] = true;
-    if (matchy[v] != -1) {
-      q.push(matchy[v]);
-      visx[matchy[v]] = true;  // in S
-      return false;
-    }
-    // 找到新的未匹配点 更新匹配点 pre 数组记录着"非匹配边"上与之相连的点
-    while (v != -1) {
-      matchy[v] = pre[v];
-      swap(v, matchx[pre[v]]);
-    }
-    return true;
-  }
+  void bfs(int startX) {
+    bool find = false;
+    int endY = -1;
 
-  void bfs(int i) {
-    while (!q.empty()) {
-      q.pop();
-    }
-    q.push(i);
-    visx[i] = true;
+    queue = vector<int>(n);
+    int qs =0, qe= 0;
+    T a = inf;
+    queue[qe++] = startX;
+
     while (true) {
-      while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        for (int v = 0; v < n; v++) {
-          if (!visy[v]) {
-            T delta = lx[u] + ly[v] - g[u][v];
-            if (slack[v] >= delta) {
-              pre[v] = u;
-              if (delta) {
-                slack[v] = delta;
-              } else if (check(v)) {  // delta=0 代表有机会加入相等子图 找增广路
-                                      // 找到就return 重建交错树
-                return;
-              }
+      while (qs < qe && !find) {
+        int x = queue[qs++];
+        visx[x] = true;
+        for (int y = 0; y < n; y++) {
+          T tmp = lx[x] + ly[y] - g[x][y];
+          if (tmp == 0) {
+            if (visy[y]) {
+                continue;
             }
+            visy[y] = true;
+            pre[y] = x;
+
+            if (matchy[y] == -1) {
+                endY = y;
+                find = true;
+                break;
+            } else {
+                queue[qe++] = matchy[y];
+            }
+          } else {
+            a = min(a, tmp);
           }
         }
       }
-      // 没有增广路 修改顶标
-      T a = inf;
-      for (int j = 0; j < n; j++) {
-        if (!visy[j]) {
-          a = min(a, slack[j]);
-        }
+
+      if (find) {
+        break;
       }
+      qs = qe = 0;
+      // 没有增广路 修改顶标
       for (int j = 0; j < n; j++) {
         if (visx[j]) {  // S
           lx[j] -= a;
+          queue[qe++] = j;
         }
         if (visy[j]) {  // T
           ly[j] += a;
-        } else {  // T'
-          slack[j] -= a;
         }
       }
-      for (int j = 0; j < n; j++) {
-        if (!visy[j] && slack[j] == 0 && check(j)) {
-          return;
-        }
-      }
+      a = inf;
     }
+
+    while (endY != -1) {
+        int preX = pre[endY], preY =matchx[preX];
+        matchx[preX] = endY;
+        matchy[endY] = preX;
+        endY = preY;
+    }
+
   }
 
   void solve() {
@@ -121,7 +108,6 @@ struct hungarian {  // km
     }
 
     for (int i = 0; i < n; i++) {
-      fill(slack.begin(), slack.end(), inf);
       fill(visx.begin(), visx.end(), false);
       fill(visy.begin(), visy.end(), false);
       bfs(i);
