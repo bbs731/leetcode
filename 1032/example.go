@@ -8,7 +8,7 @@ type trieNode struct {
 	son     [26]*trieNode
 	fail    *trieNode
 	wordend bool
-	val     int
+	val     int // pattern's index
 }
 
 func (root *trieNode) put(word string, index int) {
