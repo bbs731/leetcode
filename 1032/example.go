@@ -1,11 +1,13 @@
 package main
 
+// https://cloud.tencent.com/developer/article/1788989
+
 import (
 	"fmt"
 )
 
 type trieNode struct {
-	son     [26]*trieNode
+	son     [128]*trieNode // 可以用 128 来处理 ASCII 字符
 	fail    *trieNode
 	wordend bool
 	val     int // pattern's index
@@ -14,7 +16,8 @@ type trieNode struct {
 func (root *trieNode) put(word string, index int) {
 	o := root
 	for i := range word {
-		idx := word[i] - 'a'
+		//idx := word[i] - 'a'
+		idx := word[i]
 		if o.son[idx] == nil {
 			o.son[idx] = &trieNode{}
 		}
@@ -59,7 +62,8 @@ func (root *trieNode) match(text string, patterns []string) map[string]int {
 
 	o := root
 	for _, b := range text {
-		idx := b - 'a'
+		//idx := b - 'a'
+		idx := b
 		o = o.son[idx]
 		if o == nil {
 			o = root
